@@ -1,0 +1,68 @@
+package com.catalog.servlet;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.Logger;
+
+import com.catalog.beans.BookBean;
+import com.catalog.beans.FridgeBean;
+import com.catalog.beans.NailPolishBean;
+import com.catalog.beans.TVBean;
+import com.catalog.service.CatalogSearchService;
+
+public class HomeSearchServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	static Logger logger = Logger.getLogger(HomeSearchServlet.class);
+
+	public HomeSearchServlet() {
+		super();
+	}
+
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		logger.info("HomeSearchServlet: doPost() started");
+
+		String homeInput = "", redirect = "";
+		HttpSession session = request.getSession();
+		logger.info("Value of Search Input From Home ::  "
+				+ request.getParameter("seachName"));
+
+		if (request.getParameter("searchCriteria") != null
+				|| !"".equals(request.getParameter("searchCriteria")))
+			homeInput = request.getParameter("searchCriteria");
+
+		if (homeInput.equals("book")) {
+			ArrayList<BookBean> bookBean = CatalogSearchService
+					.getSearchBookData(request.getParameter("seachName"));
+			session.setAttribute("bookBean", bookBean);
+			redirect = "pages/listBooks.jsp";
+		} else if (homeInput.equals("tv")) {
+			ArrayList<TVBean> tvBean = CatalogSearchService
+					.getSearchTVData(request.getParameter("seachName"));
+			session.setAttribute("tvBean", tvBean);
+			redirect = "pages/listTV.jsp";
+		} else if (homeInput.equals("nailpolish")) {
+			ArrayList<NailPolishBean> nailPolishBean = CatalogSearchService
+					.getSearchNailPolishData(request.getParameter("seachName"));
+			session.setAttribute("nailPolishBean", nailPolishBean);
+			redirect = "pages/listNailPolish.jsp";
+		} else if (homeInput.equals("fridg")) {
+			ArrayList<FridgeBean> fridgeBean = CatalogSearchService
+					.getSearchFridgeData(request.getParameter("seachName"));
+			session.setAttribute("fridgeBean", fridgeBean);
+			redirect = "pages/listFridge.jsp";
+		} else
+			redirect = "pages/home.jsp";
+		logger.info("HomeSearchServlet doPost() Ends");
+		response.sendRedirect(redirect);
+
+	}
+
+}

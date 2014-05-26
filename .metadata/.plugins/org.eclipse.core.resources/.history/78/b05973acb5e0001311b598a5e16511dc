@@ -1,0 +1,46 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Shoppers Heaven Homepage</title>
+</head>
+<body>
+	<form name="homeForm" method="post" >
+		<input name="homeInput" type="hidden">
+		<div></div>
+		<div align="center" style="border-top-width: 30px">
+			<select name="searchCriteria">
+				<option value="">--Select--</option>
+				<option value="book">Book</option>
+				<option value="fridge">Fridge</option>
+				<option value="nailpolish">Nail Polish</option>
+				<option value="tv">T.V.</option>
+			</select> <input type="text" name="seachName"> <input type="button"
+				name="seachSubmit" value="GO">
+		</div>
+		<p></p>
+		<div align="center">
+			<img src="../images/books.jpg" width="300px 300px 300px 300px"
+				height="300px 300px 300px 300px" style="border: 0"
+				onclick="getFormInput('books')"> <img src="../images/tv.jpg"
+				width="300px 300px 300px 300px" height="300px 300px 300px 300px"
+				style="border: 0" onclick="getFormInput('tvs')"> <img
+				src="../images/nailpolish.jpg" width="300px 300px 300px 300px"
+				height="300px 300px 300px 300px" style="border: 0"
+				onclick="getFormInput('nailpolishes')"> <img
+				src="../images/fridge.jpg" width="300px 300px 300px 300px"
+				height="300px 300px 300px 300px" style="border: 0"
+				onclick="getFormInput('fridges')">
+		</div>
+	</form>
+</body>
+<script type="text/javascript">
+	function getFormInput(input) {
+		document.homeForm.homeInput.value = input;
+		document.homeForm.action = "../HomeInputServlet";
+		document.homeForm.submit();
+	}
+</script>
+</html>

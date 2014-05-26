@@ -1,0 +1,67 @@
+package com.catalog.beans;
+
+public class BookBean {
+	private String prodId;
+	private String productName;
+	private String companyName;
+	private String authorName;
+	private String ISBN;
+	private String price;
+	private String description;
+	private String Genre;
+	private String productURL;
+	public String getProdId() {
+		return prodId;
+	}
+	public void setProdId(String prodId) {
+		this.prodId = prodId;
+	}
+	public String getProductName() {
+		return productName;
+	}
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+	public String getAuthorName() {
+		return authorName;
+	}
+	public void setAuthorName(String authorName) {
+		this.authorName = authorName;
+	}
+	public String getISBN() {
+		return ISBN;
+	}
+	public void setISBN(String iSBN) {
+		ISBN = iSBN;
+	}
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getGenre() {
+		return Genre;
+	}
+	public void setGenre(String genre) {
+		Genre = genre;
+	}
+	public String getProductURL() {
+		return productURL;
+	}
+	public void setProductURL(String productURL) {
+		this.productURL = productURL;
+	}
+}

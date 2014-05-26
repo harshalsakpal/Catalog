@@ -1,0 +1,5 @@
+package com.catalog.beans;
+
+public class BookBean {
+	prodId, productName, companyName, authorName, ISBN, price, description, 
+}

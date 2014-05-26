@@ -1,0 +1,146 @@
+package com.catalog.service;
+
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+
+import org.apache.log4j.Logger;
+
+import com.catalog.beans.BookBean;
+import com.catalog.beans.FridgeBean;
+import com.catalog.beans.NailPolishBean;
+import com.catalog.beans.TVBean;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+import com.mongodb.Mongo;
+
+public class CatalogService {
+	static Logger logger = Logger.getLogger(CatalogService.class);
+
+	public static ArrayList<BookBean> getBookData() {
+		logger.info("CatalogService: getBookData() Starts");
+		ArrayList<BookBean> arrayOfBookBean = new ArrayList<BookBean>();
+		BookBean bookBean = null;
+		DBCursor dbBookCursor = getCollectionFromMongo("books");
+		while (dbBookCursor.hasNext()) {
+			bookBean = new BookBean();
+			DBObject toObj = dbBookCursor.next();
+			bookBean.setProdId((String) toObj.get("prodId"));
+			bookBean.setProductName((String) toObj.get("productName"));
+			bookBean.setCompanyName((String) toObj.get("companyName"));
+			bookBean.setAuthorName((String) toObj.get("authorName"));
+			bookBean.setISBN((String) toObj.get("ISBN"));
+			bookBean.setPrice((String) toObj.get("price"));
+			bookBean.setDescription((String) toObj.get("description"));
+			bookBean.setGenre((String) toObj.get("Genre"));
+			bookBean.setProductURL((String) toObj.get("productURL"));
+			arrayOfBookBean.add(bookBean);
+		}
+		logger.info("CatalogService: getBookData() Ends");
+		return arrayOfBookBean;
+	}
+
+	public static ArrayList<TVBean> getTVData() {
+		logger.info("CatalogService: getTVData() Starts");
+		ArrayList<TVBean> arrayOfTVBean = new ArrayList<TVBean>();
+		TVBean tvBean = null;
+		DBCursor dbTVCursor = getCollectionFromMongo("tv");
+		while (dbTVCursor.hasNext()) {
+			tvBean = new TVBean();
+			DBObject toObj = dbTVCursor.next();
+			tvBean.setProdId((String) toObj.get("prodId"));
+			tvBean.setCompanyName((String) toObj.get("companyName"));
+			tvBean.setProductName((String) toObj.get("productName"));
+			tvBean.setSize((String) toObj.get("size"));
+			tvBean.setDimensions((String) toObj.get("dimensions"));
+			tvBean.setProductURL((String) toObj.get("productURL"));
+			tvBean.setPrice((String) toObj.get("price"));
+			tvBean.setDescription((String) toObj.get("description"));
+			arrayOfTVBean.add(tvBean);
+		}
+		logger.info("CatalogService: getTVData() Ends");
+		return arrayOfTVBean;
+
+	}
+
+	public static ArrayList<NailPolishBean> getNailPolishData() {
+		logger.info("CatalogService: getNailPolishData() Starts");
+		ArrayList<NailPolishBean> arrayOfNailPolishBean = new ArrayList<NailPolishBean>();
+		NailPolishBean nailPolishBean = null;
+		DBCursor dbNailPolishCursor = getCollectionFromMongo("nailpolish");
+		while (dbNailPolishCursor.hasNext()) {
+			nailPolishBean = new NailPolishBean();
+			DBObject toObj = dbNailPolishCursor.next();
+			nailPolishBean.setProdId((String) toObj.get("prodId"));
+			nailPolishBean.setCompanyName((String) toObj.get("companyName"));
+			nailPolishBean.setProductName((String) toObj.get("productName"));
+			nailPolishBean.setColor((String) toObj.get("color"));
+			nailPolishBean.setSize((String) toObj.get("size"));
+			nailPolishBean.setDescription((String) toObj.get("description"));
+			nailPolishBean.setPrice((String) toObj.get("price"));
+			nailPolishBean.setProductURL((String) toObj.get("productURL"));
+			arrayOfNailPolishBean.add(nailPolishBean);
+		}
+		logger.info("CatalogService: getNailPolishData() Ends");
+		return arrayOfNailPolishBean;
+	}
+
+	public static ArrayList<FridgeBean> getFridgeData() {
+		logger.info("CatalogService: getFridgeData() Starts");
+		ArrayList<FridgeBean> arrayOfFridgeBean = new ArrayList<FridgeBean>();
+		FridgeBean fridgeBean = null;
+		DBCursor dbFridgeCursor = getCollectionFromMongo("fridge");
+		while (dbFridgeCursor.hasNext()) {
+			fridgeBean = new FridgeBean();
+			DBObject toObj = dbFridgeCursor.next();
+			fridgeBean.setProdId((String) toObj.get("prodId"));
+			fridgeBean.setCompanyName((String) toObj.get("companyName"));
+			fridgeBean.setProductName((String) toObj.get("productName"));
+			fridgeBean.setCompressor((String) toObj.get("compressor"));
+			fridgeBean.setDescription((String) toObj.get("description"));
+			fridgeBean.setPrice((String) toObj.get("price"));
+			fridgeBean.setType((String) toObj.get("type"));
+			fridgeBean.setFridgeCapacity((String) toObj.get("fridgeCapacity"));
+			fridgeBean.setDimensions((String) toObj.get("dimensions"));
+			fridgeBean.setProductURL((String) toObj.get("productURL"));
+			fridgeBean.setColor((String) toObj.get("color"));
+			arrayOfFridgeBean.add(fridgeBean);
+		}
+		logger.info("CatalogService: getFridgeData() Ends");
+		return arrayOfFridgeBean;
+
+	}
+
+	public static DBCursor getCollectionFromMongo(String collection) {
+		logger.info("CatalogService: getCollectionFromMongo() Starts");
+		DB db;
+		DBCursor dbCursor = null;
+		try {
+			db = (new Mongo("localhost", 27017)).getDB("catalog");
+			String user = "admin";
+			String pass = "admin";
+			if (db.authenticate(user, pass.toCharArray())) {
+				logger.info("Authentication Successful");
+				DBCollection dbCollection = db.getCollection(collection);
+				dbCursor = dbCollection.find();
+
+				final DBObject textSearchCommand = new BasicDBObject();
+				textSearchCommand.put("text", collection.toString());
+				textSearchCommand.put("search", "Samsung");
+				System.out.println("textSearchCommand prepared.");
+				
+				  BasicDBList result = (BasicDBList) commandResult.get("results");
+
+			} else {
+				logger.info("Invalid Username or password");
+			}
+
+		} catch (UnknownHostException e) {
+			logger.debug(e.getMessage());
+		}
+		logger.info("CatalogService: getCollectionFromMongo() Ends");
+		return dbCursor;
+	}
+}

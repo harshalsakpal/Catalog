@@ -1,0 +1,12 @@
+package com.catalog.beans;
+
+public class NailPolishBean {
+	private String prodId;
+	private String companyName;
+	private String productName;
+	private String color;
+	private String size;
+	private String description;
+	private String price;
+	private String productURL;
+}

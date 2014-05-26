@@ -1,0 +1,9 @@
+package com.catalog.beans;
+
+public class TestBean {
+	private String prodId;
+	private String productName;
+	private String[] authorName;
+	private String price;
+
+}

@@ -1,0 +1,5 @@
+package com.catalog.beans;
+
+public class FridgeBean {
+	private String prodId; private String companyName; private String productName; private String color; private String compressor; private String description; private String price; private String type; private String fridgeCapacity; private String dimensions; private String productURL;
+}

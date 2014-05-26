@@ -1,0 +1,48 @@
+package com.catalog.test;
+
+import java.net.UnknownHostException;
+
+import com.mongodb.BasicDBList;
+import com.mongodb.BasicDBObject;
+import com.mongodb.CommandResult;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+import com.mongodb.Mongo;
+
+public class SearchTest {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Mongo mongoClient = null;
+		DB db;
+		DBCollection collection;
+
+		try {
+			System.out.println("Creating mongo client");
+			mongoClient = new Mongo();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Exception thrown while creating Mongo Client");
+		}
+		System.out.println("Fetching db226 mongodb database");
+		db = mongoClient.getDB("catalog");
+		collection = db.getCollection("tv");
+
+		final DBObject textSearchCommand = new BasicDBObject();
+		textSearchCommand.put("text", collection.toString());
+		textSearchCommand.put("search", "Samsung");
+		System.out.println("textSearchCommand prepared.");
+
+		final DBObject textSearchCommand = new BasicDBObject();
+	    textSearchCommand.put("text", collection.toString());
+	    textSearchCommand.put("search", searchString);
+	    
+	    final CommandResult commandResult = db.command(textSearchCommand);
+	    dbCursor = (DBCursor) commandResult.get("results");
+
+	}
+
+}

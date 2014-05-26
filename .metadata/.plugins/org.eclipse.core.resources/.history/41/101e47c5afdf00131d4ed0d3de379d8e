@@ -1,0 +1,13 @@
+package com.catalog.beans;
+
+public class TVBean {
+	private String prodId;
+	private String companyName;
+	private String productName;
+	private String tvType;
+	private String size;
+	private String dimensions;
+	private String productURL;
+	private String price;
+
+}
