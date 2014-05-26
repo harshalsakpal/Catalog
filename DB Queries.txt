@@ -1,0 +1,67 @@
+
+TV Catalog:
+db.tv.insert({prodId: 'T1', companyName: 'Samsung', productName: 'Samsung LED Nevro', tvType: 'LED', size: '44', dimensions: '34x22x33', productURL: '../images/TV/TV 1.jpg', price:'123', description: 'Detailed Description For TV One'})
+db.tv.insert({prodId: 'T2', companyName: 'Samsung', productName: 'Samsung LED Nevro', tvType: 'LED', size: '60', dimensions: '34x22x33', productURL: '../images/TV/TV 2.jpg', price:'123', description: 'Detailed Description For TV Two'})
+db.tv.insert({prodId: 'T3', companyName: 'Samsung', productName: 'Samsung LED Nevro', tvType: 'LED', size: '56', dimensions: '34x22x33', productURL: '../images/TV/TV 3.jpg', price:'123', description: 'Detailed Description For TV Three'})
+db.tv.insert({prodId: 'T4', companyName: 'Samsung', productName: 'Samsung LED Nevro', tvType: 'LED', size: '34', dimensions: '34x22x33', productURL: '../images/TV/TV 4.jpg', price:'123', description: 'Detailed Description For TV Four'})
+db.tv.insert({prodId: 'T5', companyName: 'Samsung', productName: 'Samsung LED Nevro', tvType: 'LED', size: '23', dimensions: '34x22x33', productURL: '../images/TV/TV 5.jpg', price:'123', description: 'Detailed Description For TV Five'})
+db.tv.insert({prodId: 'T6', companyName: 'Samsung', productName: 'Samsung LED Nevro', tvType: 'LED', size: '55', dimensions: '34x22x33', productURL: '../images/TV/TV 6.jpg', price:'123', description: 'Detailed Description For TV Six'})
+db.tv.insert({prodId: 'T7', companyName: 'Samsung', productName: 'Samsung LED Nevro', tvType: 'LED', size: '65', dimensions: '34x22x33', productURL: '../images/TV/TV 7.jpg', price:'123', description: 'Detailed Description For TV Seven'})
+db.tv.insert({prodId: 'T8', companyName: 'Samsung', productName: 'Samsung LED Nevro', tvType: 'LED', size: '22', dimensions: '34x22x33', productURL: '../images/TV/TV 8.jpg', price:'123', description: 'Detailed Description For TV Eight'})
+db.tv.insert({prodId: 'T9', companyName: 'Samsung', productName: 'Samsung LED Nevro', tvType: 'LED', size: '56', dimensions: '34x22x33', productURL: '../images/TV/TV 9.jpg', price:'123', description: 'Detailed Description For TV Nine'})
+db.tv.insert({prodId: 'T10', companyName: 'Samsung', productName: 'Samsung LED Nevro', tvType: 'LED', size: '88', dimensions: '34x22x33', productURL: '../images/TV/TV 10.jpg', price:'123', description: 'Detailed Description For TV Ten'})
+
+db.adminCommand( { setParameter : 1, textSearchEnabled : true } )
+
+db.tv.ensureIndex( { description: "text" } )
+
+db.tv.ensureIndex( { description: "text" }, {productName : "text"} , {companyName: "text"} )
+
+db.tv.runCommand( "text", {search: "Samsung"})
+
+db.tv.ensureIndex({"$**": "text"})
+
+Books Catalog:
+db.books.insert({prodId: 'B1', productName: 'Bourne Legacy', companyName: 'Paul Greengrass', authorName: 'Author Name', ISBN: 'ISBN123', price: '45.98', description: 'About the book One and nothing else', Genre: 'Fiction', productURL: '../images/Books/Book 1.jpg'})
+db.books.insert({prodId: 'B2', productName: 'Bourne Supremacy', companyName: 'Paul Greengrass', authorName: 'Author Name', ISBN: 'ISBN123', price: '34.98', description: 'About the book two and nothing else', Genre: 'Fiction', productURL: '../images/Books/Book 2.jpg'})
+db.books.insert({prodId: 'B3', productName: 'Bourne Identity', companyName: 'Paul Greengrass', authorName: 'Author Name', ISBN: 'ISBN123', price: '34.98', description: 'About the book three and nothing else', Genre: 'Fiction', productURL: '../images/Books/Book 3.jpg'})
+db.books.insert({prodId: 'B4', productName: 'Bourne Ultimatum', companyName: 'Paul Greengrass', authorName: 'Author Name', ISBN: 'ISBN123', price: '47.98', description: 'About the book Four and nothing else', Genre: 'Fiction', productURL: '../images/Books/Book 4.jpg'})
+db.books.insert({prodId: 'B5', productName: 'The GodFather', companyName: 'Paul Greengrass', authorName: 'Author Name', ISBN: 'ISBN123', price: '98.98', description: 'About the book Five and nothing else', Genre: 'Fiction', productURL: '../images/Books/Book 5.jpg'})
+db.books.insert({prodId: 'B6', productName: 'Let Us C', companyName: 'Paul Greengrass', authorName: 'Author Name', ISBN: 'ISBN123', price: '32.98', description: 'About the book Six and nothing else', Genre: 'Fiction', productURL: '../images/Books/Book 6.jpg'})
+db.books.insert({prodId: 'B7', productName: 'The Complete Reference Java', companyName: 'Paul Greengrass', authorName: 'Author Name', ISBN: 'ISBN123', price: '55.98', description: 'About the book Seven and nothing else', Genre: 'Fiction', productURL: '../images/Books/Book 7.jpg'})
+db.books.insert({prodId: 'B8', productName: 'The Complete Reference C', companyName: 'Paul Greengrass', authorName: 'Author Name', ISBN: 'ISBN123', price: '12.98', description: 'About the book Eight and nothing else', Genre: 'Fiction', productURL: '../images/Books/Book 8.jpg'})
+db.books.insert({prodId: 'B9', productName: 'The Complete Reference C++', companyName: 'Paul Greengrass', authorName: 'Author Name', ISBN: 'ISBN123', price: '432.98', description: 'About the book Nine and nothing else', Genre: 'Fiction', productURL: '../images/Books/Book 9.jpg'})
+db.books.insert({prodId: 'B10', productName: 'Database Systems', companyName: 'Paul Greengrass', authorName: 'Author Name', ISBN: 'ISBN123', price: '23.98', description: 'About the book Ten and nothing else', Genre: 'Fiction', productURL: '../images/Books/Book 10.jpg'})
+
+db.books.ensureIndex({"$**": "text"})
+db.books.runCommand( "text", {search: "Paul"})
+
+NailPolish Catalog
+db.nailpolish.insert({prodId: 'N1', companyName:'Viva', productName:'VivaRed', color:'Red', size:'2', description:'Red For Women', price:'2.33', productURL: '../images/NailPolish/NP 1.jpg'})
+db.nailpolish.insert({prodId: 'N2', companyName:'Viva', productName:'VivaRed', color:'Red', size:'2', description:'Red For Women', price:'2.33', productURL: '../images/NailPolish/NP 2.jpg'})
+db.nailpolish.insert({prodId: 'N3', companyName:'Viva', productName:'VivaRed', color:'Red', size:'2', description:'Red For Women', price:'2.33', productURL: '../images/NailPolish/NP 3.jpg'})
+db.nailpolish.insert({prodId: 'N4', companyName:'Viva', productName:'VivaRed', color:'Red', size:'2', description:'Red For Women', price:'2.33', productURL: '../images/NailPolish/NP 4.jpg'})
+db.nailpolish.insert({prodId: 'N5', companyName:'Viva', productName:'VivaRed', color:'Red', size:'2', description:'Red For Women', price:'2.33', productURL: '../images/NailPolish/NP 5.jpg'})
+db.nailpolish.insert({prodId: 'N6', companyName:'Viva', productName:'VivaRed', color:'Red', size:'2', description:'Red For Women', price:'2.33', productURL: '../images/NailPolish/NP 6.jpg'})
+db.nailpolish.insert({prodId: 'N7', companyName:'Viva', productName:'VivaRed', color:'Red', size:'2', description:'Red For Women', price:'2.33', productURL: '../images/NailPolish/NP 7.jpg'})
+db.nailpolish.insert({prodId: 'N8', companyName:'Viva', productName:'VivaRed', color:'Red', size:'2', description:'Red For Women', price:'2.33', productURL: '../images/NailPolish/NP 8.jpg'})
+db.nailpolish.insert({prodId: 'N9', companyName:'Viva', productName:'VivaRed', color:'Red', size:'2', description:'Red For Women', price:'2.33', productURL: '../images/NailPolish/NP 9.jpg'})
+db.nailpolish.insert({prodId: 'N10', companyName:'Viva', productName:'VivaRed', color:'Red', size:'2', description:'Red For Women', price:'2.33', productURL: '../images/NailPolish/NP 10.jpg'})
+
+db.nailpolish.ensureIndex({"$**": "text"})
+db.nailpolish.runCommand( "text", {search: "Red"})
+
+Fridge Catalog
+db.fridge.insert({prodId: 'F1', companyName:'LG', productName:'LG Antarctica', color:'Grey', compressor:'12hp', description:'Fridge Description', price:'100', type:'2 Door', fridgeCapacity: '300L', dimensions: '23x33x22', productURL: '../images/Fridge/Fridge 1.jpg'})
+db.fridge.insert({prodId: 'F2', companyName:'LG', productName:'LG Antarctica', color:'Grey', compressor:'12hp', description:'Fridge Description', price:'100', type:'2 Door', fridgeCapacity: '300L', dimensions: '23x33x22', productURL: '../images/Fridge/Fridge 2.jpg'})
+db.fridge.insert({prodId: 'F3', companyName:'LG', productName:'LG Antarctica', color:'Grey', compressor:'12hp', description:'Fridge Description', price:'100', type:'2 Door', fridgeCapacity: '300L', dimensions: '23x33x22', productURL: '../images/Fridge/Fridge 3.jpg'})
+db.fridge.insert({prodId: 'F4', companyName:'LG', productName:'LG Antarctica', color:'Grey', compressor:'12hp', description:'Fridge Description', price:'100', type:'2 Door', fridgeCapacity: '300L', dimensions: '23x33x22', productURL: '../images/Fridge/Fridge 4.jpg'})
+db.fridge.insert({prodId: 'F5', companyName:'LG', productName:'LG Antarctica', color:'Grey', compressor:'12hp', description:'Fridge Description', price:'100', type:'2 Door', fridgeCapacity: '300L', dimensions: '23x33x22', productURL: '../images/Fridge/Fridge 5.jpg'})
+db.fridge.insert({prodId: 'F6', companyName:'LG', productName:'LG Antarctica', color:'Grey', compressor:'12hp', description:'Fridge Description', price:'100', type:'2 Door', fridgeCapacity: '300L', dimensions: '23x33x22', productURL: '../images/Fridge/Fridge 6.jpg'})
+db.fridge.insert({prodId: 'F7', companyName:'LG', productName:'LG Antarctica', color:'Grey', compressor:'12hp', description:'Fridge Description', price:'100', type:'2 Door', fridgeCapacity: '300L', dimensions: '23x33x22', productURL: '../images/Fridge/Fridge 7.jpg'})
+db.fridge.insert({prodId: 'F8', companyName:'LG', productName:'LG Antarctica', color:'Grey', compressor:'12hp', description:'Fridge Description', price:'100', type:'2 Door', fridgeCapacity: '300L', dimensions: '23x33x22', productURL: '../images/Fridge/Fridge 8.jpg'})
+db.fridge.insert({prodId: 'F9', companyName:'LG', productName:'LG Antarctica', color:'Grey', compressor:'12hp', description:'Fridge Description', price:'100', type:'2 Door', fridgeCapacity: '300L', dimensions: '23x33x22', productURL: '../images/Fridge/Fridge 9.jpg'})
+db.fridge.insert({prodId: 'F10', companyName:'LG', productName:'LG Antarctica', color:'Grey', compressor:'12hp', description:'Fridge Description', price:'100', type:'2 Door', fridgeCapacity: '300L', dimensions: '23x33x22', productURL: '../images/Fridge/Fridge 10.jpg'})
+
+db.fridge.ensureIndex({"$**": "text"})
+db.fridge.runCommand( "text", {search: "12"})
